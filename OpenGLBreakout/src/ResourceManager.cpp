@@ -1,12 +1,20 @@
 #include "ResourceManager.h"
 #include <fstream>
 #include <iostream>
-#include <sstream>      // std::stringstream
+#include <sstream>     
+#include "Log.h"
 using namespace std;
 
 Shader ResourceManager::LoadShader(const char* shaderFile)
 {
     ifstream file(shaderFile);
+    if (!file)
+    {
+        LOG_ERROR("Could not find shader file!");
+        __debugbreak();
+    }
+
+    LOG_INFO("Found shader file!");
     string line;
     Shader::ShaderType currentReadType = Shader::NONE; 
     stringstream ss[2];
@@ -29,9 +37,6 @@ Shader ResourceManager::LoadShader(const char* shaderFile)
             ss[currentReadType] << line << "\n";
         }
     }
-
-    std::cout << "VERTEX SOURCE: \n" << ss[Shader::VERTEX].str() << std::endl;
-    std::cout << "FRAGMENT SOURCE: \n" << ss[Shader::FRAGMENT].str() << std::endl;
 
     file.close();
 

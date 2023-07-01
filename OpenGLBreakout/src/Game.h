@@ -1,4 +1,5 @@
 #pragma once
+#include "Shader.h"
 
 enum GameState
 {
@@ -11,6 +12,8 @@ class Game
 {
 private:
 	bool keys[1024];
+	float containerRotation = 0;
+	Shader containerShader;
 public:
 	Game();
 	~Game();
@@ -19,6 +22,7 @@ public:
 
 	// Load shaders and texture data
 	void Init();
+	void InitTextures();
 
 	// Game Loop
 	void ProcessInput();

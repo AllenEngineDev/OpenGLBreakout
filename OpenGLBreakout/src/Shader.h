@@ -11,8 +11,13 @@ public:
 	};
 
 	Shader(const std::string& vertexSource, const std::string& fragmentSource);
+	Shader();
 	~Shader();
+	void LoadSources(const std::string& vertexSource, const std::string& fragmentSource);
 	void Use();
+	unsigned int GetID();
+	void SetInt(const char* name, int to);
+	void SetMat4(const char* name, const GLfloat* value);
 private:
 	unsigned int m_ProgramID;
 	unsigned int m_FragmentShaderID;
